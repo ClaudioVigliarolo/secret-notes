@@ -110,7 +110,7 @@ router.post("/users/me/avatar", auth, async (req, res) => {
             return res.status(500).send(err);
         } else {
             await User.findOneAndUpdate({ _id: req.user._id }, { avatar: imageId });
-            res.send(`http://localhost:5000/profilePhotos/${imageId}`);
+            res.send(`${process.env.REACT_APP_API_ENDPOINT}/${imageId}`);
         }
 
 
@@ -120,7 +120,8 @@ router.post("/users/me/avatar", auth, async (req, res) => {
 
 router.get("/users/me/avatar", auth, async (req, res) => {
     if (req.user.avatar !== 'default') {
-        res.send(`http://localhost:5000/profilePhotos/${req.user.avatar}`);
+        `${process.env.REACT_APP_API_ENDPOINT}/users/login`
+        res.send(`${process.env.REACT_APP_API_ENDPOINT}/profilePhotos/${req.user.avatar}`);
     }
     else {
         res.status(404).send(undefined)

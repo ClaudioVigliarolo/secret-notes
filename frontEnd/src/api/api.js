@@ -70,7 +70,7 @@ export const getUserAvatar = async userToken => {
 
 export const getNotebooks = async (userId, userToken) => {
   return axios
-    .get(`http://localhost:5000/noteBooks/${userId}`, {
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/noteBooks/${userId}`, {
       headers: {
         Authorization: 'Bearer ' + userToken
       }
@@ -85,7 +85,7 @@ export const getNotebooks = async (userId, userToken) => {
 
 export const getNotes = async (notebookId, userToken) => {
   return axios
-    .get(`http://localhost:5000/noteBook/${notebookId}`, {
+    .get(`${process.env.REACT_APP_API_ENDPOINT}/noteBook/${notebookId}`, {
       headers: {
         Authorization: 'Bearer ' + userToken
       }
@@ -101,7 +101,7 @@ export const getNotes = async (notebookId, userToken) => {
 export const uploadNote = async (note, noteBookId, userToken) => {
   return axios
     .post(
-      `http://localhost:5000/noteBooks/${noteBookId}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/noteBooks/${noteBookId}`,
       {
         note
       },
@@ -122,7 +122,7 @@ export const uploadNote = async (note, noteBookId, userToken) => {
 
 export const removeNote = async (noteBookId, noteId, userToken) => {
   return axios
-    .delete(`http://localhost:5000/noteBook/${noteBookId}/${noteId}`, {
+    .delete(`${process.env.REACT_APP_API_ENDPOINT}/noteBook/${noteBookId}/${noteId}`, {
       headers: {
         Authorization: 'Bearer ' + userToken
       }
@@ -138,7 +138,7 @@ export const removeNote = async (noteBookId, noteId, userToken) => {
 export const updateNotebook = async (newNotebook, userToken) => {
   return axios
     .patch(
-      `http://localhost:5000/noteBook/${newNotebook._id}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/noteBook/${newNotebook._id}`,
       {
         name: newNotebook.name
       },
@@ -159,7 +159,7 @@ export const updateNotebook = async (newNotebook, userToken) => {
 
 export const deleteNotebook = async (id, userToken) => {
   return axios
-    .delete(`http://localhost:5000/noteBook/${id}`, {
+    .delete(`${process.env.REACT_APP_API_ENDPOINT}/noteBook/${id}`, {
       headers: {
         Authorization: 'Bearer ' + userToken
       }
@@ -182,7 +182,7 @@ app.post('/upload', function(req, res) {
 export const updateNote = async (noteBookId, noteId, note, userToken) => {
   return axios
     .patch(
-      `http://localhost:5000/noteBook/${noteBookId}/${noteId}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/noteBook/${noteBookId}/${noteId}`,
       {
         note
       },
@@ -203,7 +203,7 @@ export const updateNote = async (noteBookId, noteId, note, userToken) => {
 export const updateUser = async (newUserData, userToken) => {
   return axios
     .patch(
-      `http://localhost:5000/users/me`,
+      `${process.env.REACT_APP_API_ENDPOINT}/users/me`,
       {
         newUserData
       },
@@ -226,7 +226,7 @@ export const uploadAvatar = async (photo, userToken) => {
   const formData = new FormData();
   formData.append('avatar', photo, photo.filename);
   return axios
-    .post(`http://localhost:5000/users/me/avatar`, formData, {
+    .post(`${process.env.REACT_APP_API_ENDPOINT}/users/me/avatar`, formData, {
       headers: {
         Authorization: 'Bearer ' + userToken,
         'Content-Type': 'multipart/form-data'
@@ -248,7 +248,7 @@ const note = {
     }
 
 
-    axios.post("http://localhost:5000/noteBooks/5e2876dc63bae53d885c2812", {
+    axios.post("${process.env.REACT_APP_API_ENDPOINT}/noteBooks/5e2876dc63bae53d885c2812", {
       note
     }, {
       headers: {
@@ -273,7 +273,7 @@ const note = {
 
 
 
-axios.post("http://localhost:5000/note", {
+axios.post("${process.env.REACT_APP_API_ENDPOINT}/note", {
       name: "secondNott",
       owner: userData._id,
     }, {
@@ -296,7 +296,7 @@ axios.post("http://localhost:5000/note", {
 
 
    //get all notes of ITEM
-    axios.get(`http://localhost:5000/noteBook/5e2876dc63bae53d885c2812`, {
+    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/noteBook/5e2876dc63bae53d885c2812`, {
       headers: {
         'Authorization': 'Bearer ' + userToken
       },
@@ -319,7 +319,7 @@ axios.post("http://localhost:5000/note", {
   executeQuery = (userData) => {
     const { userToken } = this.props.location;
     //get all notes of ITEM
-    axios.get(`http://localhost:5000/noteBook/5e2876dc63bae53d885c2812`, {
+    axios.get(`${process.env.REACT_APP_API_ENDPOINT}/noteBook/5e2876dc63bae53d885c2812`, {
       headers: {
         'Authorization': 'Bearer ' + userToken
       },

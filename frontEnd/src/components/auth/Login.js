@@ -29,7 +29,7 @@ class Login extends Component {
 
 
   loginUser = ({ email, password }) => {
-    axios.post("http://localhost:5000/users/login", {
+    axios.post(`${process.env.REACT_APP_API_ENDPOINT}/users/login`, {
       email,
       password,
     })
