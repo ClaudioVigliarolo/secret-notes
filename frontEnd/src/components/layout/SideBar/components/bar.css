@@ -1,0 +1,14 @@
+.bar-item {
+  width: 100%;
+
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar-item:hover {
+  color: red;
+}
