@@ -35,7 +35,7 @@
   "scripts": {
     "server": "node-env-run server --exec nodemon | pino-colada",
     "dev": "env-cmd -f ./config/dev.env react-scripts start",
-    "start": "react-scripts start",
+    "start": "env-cmd -f ./config/prod.env react-scripts start",
     "build:prod": "cross-env REACT_APP_BASENAME=/demo/secret-notes REACT_APP_GAID=UA-115105611-1 npm run build",
     "build": "cross-env REACT_APP_BASENAME=/demo/secret-notes react-scripts build",
     "test": "react-scripts test",
