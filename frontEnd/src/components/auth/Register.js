@@ -107,22 +107,21 @@ class Registration extends Component {
 
   saveUser = ({ firstName, lastName, email, password, secret }) => {
     axios
-
-      .post(`${process.env.REACT_APP_API_ENDPOINT}/users`), {
+      .post(`${process.env.REACT_APP_API_ENDPOINT}/users`, {
         firstName,
         lastName,
         email,
         password,
         secret
-      }
-        .then(() => {
-          this.props.history.push(`/login`);
-        })
-        .catch(error => {
-          let errors = [];
-          error = { message: error };
-          this.setState({ errors: errors.concat(error) });
-        });
+      })
+      .then(() => {
+        this.props.history.push(`/login`);
+      })
+      .catch(error => {
+        let errors = [];
+        error = { message: error };
+        this.setState({ errors: errors.concat(error) });
+      });
   };
 
   render() {

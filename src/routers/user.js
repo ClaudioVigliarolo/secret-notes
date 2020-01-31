@@ -110,7 +110,7 @@ router.post("/users/me/avatar", auth, async (req, res) => {
             return res.status(500).send(err);
         } else {
             await User.findOneAndUpdate({ _id: req.user._id }, { avatar: imageId });
-            res.send(`${process.env.REACT_APP_API_ENDPOINT}/${imageId}`);
+            res.send(`${process.env.REACT_APP_API_ENDPOINT}/profilePhotos/${imageId}`);
         }
 
 
