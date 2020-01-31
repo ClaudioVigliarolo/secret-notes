@@ -8,7 +8,7 @@ import Register from './components/auth/Register'
 import Main from './components/main/Main'
 import NotFound from './components/NotFound/NotFound'
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./shards-dashboard-template/styles/shards-dashboards.1.1.0.min.css";
+import "./styles-template/styles/shards-dashboards.1.1.0.min.css"
 import "./styles/app.css"
 
 
