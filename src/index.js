@@ -14,10 +14,7 @@ const port = process.env.PORT || 5000;
 app.use(express.static('../frontend/build'));
 
 // Express serve up index.html file if it doesn't recognize route
-const path = require('path');
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'static', 'index.html'));
-});
+
 
 
 app.use(express.static(__dirname + '/public'));
