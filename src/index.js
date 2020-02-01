@@ -15,7 +15,9 @@ app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
 // Express serve up index.html file if it doesn't recognize route
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '..', '/frontend/build/index.html'));
+});
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
