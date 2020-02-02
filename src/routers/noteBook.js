@@ -6,6 +6,7 @@ const router = new express.Router()
 
 
 router.post('/notebooks', auth, async (req, res) => {
+    console.log("urrlll", req.body)
     const newNotebook = new Notebook({
         ...req.body,
         owner: req.user._id

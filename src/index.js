@@ -1,3 +1,4 @@
+const config = require('../config/config')
 const express = require('express');
 require('./db/mongoose');
 const bodyParser = require('body-parser');
@@ -6,19 +7,19 @@ const userRouter = require('./routers/user');
 const NotebookRouter = require('./routers/noteBook');
 const cors = require('cors');
 const morgan = require('morgan');
-
+const path = require('path')
 const app = express();
-const port = process.env.PORT || 5000;
+const port = config.HOSTNAME;
 
 // Exprees will serve up production assets
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 
 // Express serve up index.html file if it doesn't recognize route
-
+/*
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '..', '/frontend/build/index.html'));
+    res.sendFile(path.join(__dirname + '..', '/client/build/index.html'));
 });
-
+*/
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(cors());
