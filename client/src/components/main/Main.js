@@ -14,7 +14,7 @@ class Main extends Component {
   state = {
     loading: true, userData: null, profileImage: null, error: false, token: null, notebooks: [],
     currentNotes: [], currentNotebook: {}, currentNotebookIndex: 0, showedNotes: [],
-    isEditable: false, searchTerm: "", firstMessage: false
+    isEditable: false, searchTerm: ""
   }
 
   componentDidMount() {
@@ -30,6 +30,7 @@ class Main extends Component {
           this.loadNotebooks(response.data, userToken)
           this.setState({ token: userToken })
           this.setState({ userData: response.data })
+          this.setState({ loading: false });
           console.log("state", response.data)
         }
       }).catch(err => {
@@ -55,13 +56,11 @@ class Main extends Component {
   loadNotebooks = async (userData, userToken) => {
     const notebooksData = await getNotebooks(userData._id, userToken);
     const notebooks = notebooksData.data;
-    this.setState({ notebooks: [...notebooks] }, () => notebooks.length > 0 ? this.loadNotes(0) : this.showFirstMessage())
+    this.setState({ notebooks: [...notebooks] }, () => notebooks.length > 0 && this.loadNotes(0))
 
   }
 
-  showFirstMessage = () => {
-    this.setState({ firstMessage: true })
-  }
+
 
   createDefaultNotebook = () => {
     this.setState({ startTip: true })
@@ -121,7 +120,7 @@ class Main extends Component {
 
   render() {
     const { match } = this.props;
-    const { userData, token, notebooks, currentNotebook, loading, currentNotebookIndex, showedNotes, isEditable, profileImage, searchTerm, firstMessage } = this.state;
+    const { userData, token, notebooks, currentNotebook, loading, currentNotebookIndex, showedNotes, isEditable, profileImage, searchTerm } = this.state;
     return (
       <div>
         <Container fluid >
@@ -139,7 +138,8 @@ class Main extends Component {
               tag="main"
 
             >
-              <TopBar userData={userData} token={token} handleSearchChange={this.handleSearchNotes} searchValue={searchTerm} profileImage={profileImage} key={profileImage} />
+              <TopBar userData={userData} token={token} handleSearchChange={this.handleSearchNotes} searchValue={searchTerm}
+                profileImage={profileImage} key={userData && userData.firstName} />
               <Switch>
                 <Route exact path={match.path} render={() => (
                   <Notes userData={userData && userData} loading={loading} firstNotebook={notebooks[0]}
