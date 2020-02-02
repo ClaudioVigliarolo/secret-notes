@@ -4,9 +4,10 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 var path = require("path");
 var uniqid = require('uniqid');
+const { HOSTNAME } = require('../../config/config')
 
 router.post('/users', async (req, res) => {
-    const user = new User(req.body)
+    const user = new User(req.body.newUser)
     try {
         await user.save()
         const token = await user.generateAuthToken()
@@ -21,11 +22,13 @@ router.post('/users', async (req, res) => {
 
 
 router.post('/users/login', async (req, res) => {
+    console.log(req.body.email)
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
         res.send({ user, token })
     } catch (e) {
+        console.log(e)
         res.status(400).send()
     }
 })
@@ -54,10 +57,10 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 })
 
 
-// console.log("reqqqq", req.user.avatar)
+//
 //res.send({user: req.user, avatar: user.avatar}) 
 router.get('/users/me', auth, async (req, res) => {
-
+    console.log("reqqqq", req.user)
     res.send(req.user)
 
 })
@@ -110,7 +113,8 @@ router.post("/users/me/avatar", auth, async (req, res) => {
             return res.status(500).send(err);
         } else {
             await User.findOneAndUpdate({ _id: req.user._id }, { avatar: imageId });
-            res.send(`${process.env.REACT_APP_API_ENDPOINT}/profilePhotos/${imageId}`);
+            console.log("888888888888", `/profilePhotos/${imageId}`)
+            res.send(`/profilePhotos/${imageId}`);
         }
 
 
@@ -120,8 +124,8 @@ router.post("/users/me/avatar", auth, async (req, res) => {
 
 router.get("/users/me/avatar", auth, async (req, res) => {
     if (req.user.avatar !== 'default') {
-        `${process.env.REACT_APP_API_ENDPOINT}/users/login`
-        res.send(`${process.env.REACT_APP_API_ENDPOINT}/profilePhotos/${req.user.avatar}`);
+        `/users/login`
+        res.send(`/profilePhotos/${req.user.avatar}`);
     }
     else {
         res.status(404).send(undefined)
