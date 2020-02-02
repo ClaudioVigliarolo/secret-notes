@@ -22,8 +22,7 @@ class UserActions extends React.Component {
     this.state = {
       visible: false,
       userData: this.props.userData,
-      token: this.props.token,
-      profileImage: this.props.profileImage
+      token: this.props.token
     };
 
     this.toggleUserActions = this.toggleUserActions.bind(this);
@@ -66,7 +65,7 @@ class UserActions extends React.Component {
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions} >
         <div className="profile-top">
           {this.state.userData &&
-            this.renderProfileImage(this.state.profileImage)}{' '}
+            this.renderProfileImage(this.props.profileImage)}{' '}
           <DropdownToggle caret tag={NavLink} className="text-nowrap px-3">
             <span className="d-none d-md-inline-block">
               {this.state.userData && this.state.userData.firstName}

@@ -13,11 +13,11 @@ export default class TopBar extends React.PureComponent {
     userData: this.props.userData,
     searchLoading: false,
     token: this.props.token,
-    profileImage: this.props.profileImage
   };
 
   render() {
-    const { userData, token, profileImage } = this.state;
+    const { userData, token } = this.state;
+    const { profileImage } = this.props;
     return (
       <div className={classes} key={userData}>
         <Container className="p-0">
