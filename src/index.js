@@ -11,7 +11,7 @@ const path = require('path')
 const app = express();
 
 // Exprees will serve up production assets
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
