@@ -6,7 +6,6 @@ const fileUpload = require('express-fileupload');
 const userRouter = require('./routers/user');
 const NotebookRouter = require('./routers/noteBook');
 const cors = require('cors');
-const history = require('express-history-api-fallback');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
@@ -25,11 +24,12 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(userRouter);
+
 app.use(morgan('dev'));
-app.use(NotebookRouter);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(userRouter);
+app.use(NotebookRouter);
 app.listen(PORT, () => {
   console.log('Server is up on PORT ' + PORT);
 });
