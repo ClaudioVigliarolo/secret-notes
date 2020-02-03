@@ -36,7 +36,6 @@ export default class NotesBody extends Component {
   }
 
   renderNotes = (notes) => {
-    console.log(this.props.firstNotebook)
     if (!this.props.firstNotebook) return this.showStartMessage()
     return notes.length > 0 && notes.map(item => (
       <NoteItem key={item._id} title={item.note.title} description={item.note.description} completed={item.note.completed}

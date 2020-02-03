@@ -6,7 +6,6 @@ const router = new express.Router()
 
 
 router.post('/notebooks', auth, async (req, res) => {
-    console.log("urrlll", req.body)
     const newNotebook = new Notebook({
         ...req.body,
         owner: req.user._id
@@ -64,15 +63,12 @@ router.get('/notebook/:id', auth, async (req, res) => {
 
 
 router.delete('/notebook/:notebookId/:id', auth, async (req, res) => {
-
-    console.log("cjaimmat", req.params.notebookId, req.params.id)
     try {
         const notes = await Notebook.findById({ _id: req.params.notebookId });
 
         await notes.findByIdAndRemove(req.params.id);
         res.status(201).send(notes);
     } catch (e) {
-        console.log(e)
         res.status(500).send();
     }
 
@@ -81,7 +77,6 @@ router.delete('/notebook/:notebookId/:id', auth, async (req, res) => {
 
 
 router.patch('/notebook/:notebookId', auth, async (req, res) => {
-    console.log("00000''", req.params.notebookId, req.body.name)
     try {
         const updatedNotebook = await Notebook.findByIdAndUpdate({ _id: req.params.notebookId },
             { name: req.body.name });
@@ -90,20 +85,15 @@ router.patch('/notebook/:notebookId', auth, async (req, res) => {
 
         res.status(201).send(updatedNotebook);
     } catch (e) {
-        console.log(e)
-
         res.status(500).send();
     }
 })
 //delete
 router.delete('/notebook/:notebookId', auth, async (req, res) => {
-    console.log("00000''", req.params.notebookId)
     try {
         const updatedNotebook = await Notebook.findByIdAndDelete({ _id: req.params.notebookId });
         res.status(201).send(updatedNotebook);
     } catch (e) {
-        console.log(e)
-
         res.status(500).send();
     }
 })
@@ -119,7 +109,6 @@ router.patch('/notebook/:notebookId/:id', auth, async (req, res) => {
 
         res.status(201).send(updatedNotebook);
     } catch (e) {
-        console.log(e)
 
         res.status(500).send();
     }

@@ -35,8 +35,6 @@ class Registration extends Component {
     if (this.isFormValid()) {
       this.setState({ errors: [] });
       this.saveUser(this.state);
-    } else {
-      console.log(this.state.errors);
     }
   };
 
@@ -117,7 +115,6 @@ class Registration extends Component {
       })
       .catch(error => {
         let errors = [];
-        console.log(error)
         error = { message: "Server Error" };
         this.setState({ errors: errors.concat(error) });
       });
