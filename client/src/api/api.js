@@ -16,7 +16,6 @@ export const createUser = async (newUser) => {
 }
 
 export const loginUser = async (email, password) => {
-  console.log("hosttt", email, password)
   return axios.post(`${HOSTNAME}/users/login`, {
     email,
     password,
@@ -182,7 +181,6 @@ export const updateNotebook = async (newNotebook, userToken) => {
       }
     )
     .then(res => {
-      console.log('vdiiamo', res);
       return res;
     })
     .catch(err => {
@@ -198,7 +196,6 @@ export const deleteNotebook = async (id, userToken) => {
       }
     })
     .then(res => {
-      console.log('vdiiamo', res);
       return res;
     })
     .catch(err => {
@@ -206,12 +203,6 @@ export const deleteNotebook = async (id, userToken) => {
     });
 };
 
-/* 
- 
-app.post('/upload', function(req, res) {
-  console.log(req.files.foo); // the uploaded file object
-});
-*/
 export const updateNote = async (noteBookId, noteId, note, userToken) => {
   return axios
     .patch(

@@ -22,13 +22,11 @@ router.post('/users', async (req, res) => {
 
 
 router.post('/users/login', async (req, res) => {
-    console.log(req.body.email)
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
         res.send({ user, token })
     } catch (e) {
-        console.log(e)
         res.status(400).send()
     }
 })
@@ -60,7 +58,6 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 //
 //res.send({user: req.user, avatar: user.avatar}) 
 router.get('/users/me', auth, async (req, res) => {
-    console.log("reqqqq", req.user)
     res.send(req.user)
 
 })
@@ -109,11 +106,9 @@ router.post("/users/me/avatar", auth, async (req, res) => {
     let avatarData = req.files.avatar;
     avatarData.mv(path.join(__dirname, `../public/profilePhotos/${imageId}`), async function (err) {
         if (err) {
-            console.log(err)
             return res.status(500).send(err);
         } else {
             await User.findOneAndUpdate({ _id: req.user._id }, { avatar: imageId });
-            console.log("888888888888", `/profilePhotos/${imageId}`)
             res.send(`/profilePhotos/${imageId}`);
         }
 

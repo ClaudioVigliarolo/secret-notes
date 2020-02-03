@@ -31,7 +31,6 @@ class Main extends Component {
           this.setState({ token: userToken })
           this.setState({ userData: response.data })
           this.setState({ loading: false });
-          console.log("state", response.data)
         }
       }).catch(err => {
         this.setState({ error: true })
@@ -145,12 +144,12 @@ class Main extends Component {
                   <Notes userData={userData && userData} loading={loading} firstNotebook={notebooks[0]}
                     token={token} notes={showedNotes} NotebookId={currentNotebook._id}
                     notebookHeader={currentNotebook.name} isEditable={isEditable} onChangeNoteBookName={this.onChangeNotebookName}
-                    key={token && userData && notebooks[0] && notebooks[0]._id && currentNotebookIndex} />)} />
+                    key={userData && notebooks[0] && notebooks[0]._id && currentNotebookIndex} />)} />
 
                 <Route exact path={`${match.path}/profile`} render={() => (<Profile component={Profile}
                   updateChanges={this.updateUser}
                   profileImage={profileImage} userData={userData} token={token}
-                  key={userData && userData._id && profileImage} changeAvatar={this.changeAvatar} />)} />
+                  key={userData && userData._id} changeAvatar={this.changeAvatar} />)} />
               </Switch>
             </Col>
           </Row>

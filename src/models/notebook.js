@@ -53,7 +53,6 @@ NotebookSchema.methods.createNote = async function (newNote) {
         Notebook.notes = [newNote].concat(Notebook.notes);
         await Notebook.save();
     } catch (e) {
-        console.log(e)
         throw new Error(e)
     }
 
@@ -64,10 +63,8 @@ NotebookSchema.methods.findByIdAndRemove = async function (noteId) {
     const Notebook = this
     try {
         Notebook.notes = Notebook.notes.filter(item => item._id != noteId);
-        console.log(Notebook.notes)
         await Notebook.save();
     } catch (e) {
-        console.log(e)
         throw new Error(e)
     }
 
@@ -85,7 +82,6 @@ NotebookSchema.methods.findByIdAndUpdate = async function (newNote, noteId) {
         Notebook.notes[noteIndex].note.completed = newNote.completed;
         await Notebook.save();
     } catch (e) {
-        console.log(e)
         throw new Error(e)
     }
 
