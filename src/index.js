@@ -13,9 +13,6 @@ const path = require('path');
 const app = express();
 
 // Exprees will serve up production assets
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
-
-app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(compression());
 app.use(cors());
@@ -28,9 +25,12 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(userRouter);
+app.use(NotebookRouter);
 app.use(morgan('dev'));
 app.use(history());
-app.use(NotebookRouter);
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(express.static(__dirname + '/public'));
+
 
 app.listen(PORT, () => {
   console.log('Server is up on PORT ' + PORT);
