@@ -61,6 +61,18 @@ body {
   transform: translate(-50%, 0);
 }
 
+@media only screen and (max-width: 600px) {
+  .bottom-nav-text {
+    position: fixed;
+    color: #3d5170;
+    margin-bottom: 30px;
+    cursor: pointer;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%, 0);
+  }
+}
+
 .bottom-nav-text-i {
   border: solid #3d5170;
   border-width: 0 2px 2px 0;
@@ -148,7 +160,7 @@ body {
   position: absolute;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
   .menu-icon {
     color: grey !important;
     top: 70px;
