@@ -63,13 +63,17 @@ body {
 
 @media only screen and (max-width: 600px) {
   .bottom-nav-text {
-    position: fixed;
+    margin: 0 auto;
+    position: absolute;
     color: #3d5170;
-    margin-bottom: 30px;
+
     cursor: pointer;
-    left: 50%;
-    bottom: 0px;
-    transform: translate(-50%, 0);
+    bottom: 10px;
+    text-align: left;
+  }
+
+  .registation {
+    bottom: -50px;
   }
 }
 
