@@ -1,6 +1,7 @@
 const { PORT } = require('../config/config');
 const express = require('express');
 require('./db/mongoose');
+const history = require('express-history-api-fallback');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const userRouter = require('./routers/user');
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
+app.use(history);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.use(userRouter);
