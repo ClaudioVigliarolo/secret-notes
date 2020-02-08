@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { createUser } from '../../api/api'
+import { createUser } from '../../api/api';
 class Registration extends Component {
   state = {
     firstName: '',
@@ -8,7 +8,7 @@ class Registration extends Component {
     email: '',
     password: '',
     secret: '',
-    errors: [],
+    errors: []
   };
 
   displayErrors = errors => errors.map((error, i) => error.message);
@@ -22,12 +22,9 @@ class Registration extends Component {
   };
 
   handleInputError = (errors, inputName) => {
-    return errors.some(
-      error =>
-        error.form && error.form.includes(inputName)
-    )
-      ? "form-control is-invalid"
-      : "form-control";
+    return errors.some(error => error.form && error.form.includes(inputName))
+      ? 'form-control is-invalid'
+      : 'form-control';
   };
 
   handleSubmit = e => {
@@ -38,22 +35,24 @@ class Registration extends Component {
     }
   };
 
-  getEmptyFields = (state) => {
+  getEmptyFields = state => {
     let emptyFields = [];
     Object.keys(state).forEach(key => {
-      if (state[key] === "") emptyFields.push(key);
+      if (state[key] === '') emptyFields.push(key);
     });
 
     return emptyFields.toString();
-  }
+  };
 
   isFormValid = () => {
     let errors = [];
     let error;
 
     if (this.isFormEmpty(this.state)) {
-
-      error = { message: 'Fill in all fields', form: this.getEmptyFields(this.state) };
+      error = {
+        message: 'Fill in all fields',
+        form: this.getEmptyFields(this.state)
+      };
       this.setState({ errors: errors.concat(error) });
       return false;
     } else if (!this.isPasswordValid(this.state)) {
@@ -66,7 +65,6 @@ class Registration extends Component {
   };
 
   isFormEmpty = ({ firstName, lastName, password, email, secret }) => {
-
     return (
       !firstName.length ||
       !lastName.length ||
@@ -75,8 +73,6 @@ class Registration extends Component {
       !password.length
     );
   };
-
-
 
   isPasswordValid({ password }) {
     const p = password;
@@ -115,17 +111,16 @@ class Registration extends Component {
       })
       .catch(error => {
         let errors = [];
-        error = { message: "Server Error" };
+        error = { message: 'Server Error' };
         this.setState({ errors: errors.concat(error) });
       });
   };
-
 
   render() {
     const { firstName, lastName, email, password, secret, errors } = this.state;
 
     return (
-      <div className="div-center form-responsive">
+      <div className="div-center form-responsive" style={{ marginBottom: 100 }}>
         <div className="card card-small mb-4">
           <div className="card-header border-bottom">
             <h4 className="text-center">Registration</h4>
@@ -141,7 +136,6 @@ class Registration extends Component {
                         <input
                           name="firstName"
                           type="text"
-
                           className={this.handleInputError(errors, 'firstName')}
                           id="feFirstName"
                           placeholder="First Name"
@@ -155,7 +149,6 @@ class Registration extends Component {
                           name="lastName"
                           type="text"
                           className={this.handleInputError(errors, 'lastName')}
-
                           id="feLastName"
                           placeholder="Last Name"
                           value={lastName}
@@ -175,7 +168,6 @@ class Registration extends Component {
                           name="email"
                           type="email"
                           className={this.handleInputError(errors, 'email')}
-
                           id="feEmailAddress"
                           placeholder="Email"
                           value={email}
@@ -188,7 +180,6 @@ class Registration extends Component {
                           name="password"
                           type="password"
                           className={this.handleInputError(errors, 'password')}
-
                           id="fePassword"
                           onChange={this.handleChange}
                           value={password}
@@ -224,18 +215,18 @@ class Registration extends Component {
                       </button>
                     </div>
                   </form>
-                  <Link to="/login" className="bottom-nav-text">
-                    {' '}
-                    <h6>
-                      {' '}
-                      Login <i className="arrow right bottom-nav-text-i"></i>{' '}
-                    </h6>
-                  </Link>
                 </div>
               </div>
             </li>
           </ul>
         </div>
+        <Link to="/login" className="bottom-nav-text registation">
+          {' '}
+          <h6>
+            {' '}
+            Login <i className="arrow right bottom-nav-text-i"></i>{' '}
+          </h6>
+        </Link>
       </div>
     );
   }
