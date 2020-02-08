@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(
   fallback('index.html', {
-    root: path.join(__dirname, '..', 'client', 'build', 'index.html')
+    root: path.join(__dirname, '..', 'client', 'build')
   })
 );
 app.use(express.static(__dirname + '/public'));
