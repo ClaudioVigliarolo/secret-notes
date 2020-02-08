@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-//import Main from './components/main/Main';
 import NotFound from './components/NotFound/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles-template/styles/styles.1.1.0.min.css';
