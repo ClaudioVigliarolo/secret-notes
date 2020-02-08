@@ -1,7 +1,7 @@
 const { PORT } = require('../config/config');
 const express = require('express');
 require('./db/mongoose');
-const fallback = require('express-history-api-fallback');
+const history = require('express-history-api-fallback');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const userRouter = require('./routers/user');
@@ -27,13 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
-app.use(
-  fallback('index.html', {
-    root: path.join(__dirname, '..', 'client', 'build')
-  })
-);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(history(path.join(__dirname, '..', 'client', 'build', 'index.html')));
 app.use(userRouter);
 app.use(NotebookRouter);
 app.listen(PORT, () => {
