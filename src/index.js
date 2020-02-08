@@ -27,7 +27,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
-app.use(history());
+app.use(
+  history({
+    // verbose: true
+  })
+);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.use(userRouter);
