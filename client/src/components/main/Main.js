@@ -141,10 +141,10 @@ class Main extends Component {
                 profileImage={profileImage} key={userData && userData.firstName} />
               <Switch>
                 <Route exact path={match.path} render={() => (
-                  <Notes userData={userData && userData} loading={loading} firstNotebook={notebooks[0]}
+                  <Notes userData={userData && userData} loading={loading} firstNotebook={notebooks && notebooks.length > 0}
                     token={token} notes={showedNotes} NotebookId={currentNotebook._id}
                     notebookHeader={currentNotebook.name} isEditable={isEditable} onChangeNoteBookName={this.onChangeNotebookName}
-                    key={userData && notebooks[0] && notebooks[0]._id && currentNotebookIndex} />)} />
+                    key={currentNotebookIndex} />)} />
 
                 <Route exact path={`${match.path}/profile`} render={() => (<Profile component={Profile}
                   updateChanges={this.updateUser}

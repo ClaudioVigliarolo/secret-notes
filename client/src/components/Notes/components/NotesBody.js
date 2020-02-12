@@ -4,7 +4,7 @@ import '../notes.css'
 import NoteItem from './NoteItem'
 import { uploadNote, removeNote, updateNote } from '../../../api/api'
 export default class NotesBody extends Component {
-  state = { token: this.props.token, userData: this.props.userData, notes: this.props.notes, NotebookId: this.props.NotebookId }
+  state = { token: this.props.token, userData: this.props.userData, NotebookId: this.props.NotebookId }
 
 
   uploadNote = async (note) => {
@@ -35,9 +35,9 @@ export default class NotesBody extends Component {
     )
   }
 
-  renderNotes = (notes) => {
-    if (!this.props.firstNotebook) return this.showStartMessage()
-    return notes.length > 0 && notes.map(item => (
+  renderNotes = (firstNotebook, notes) => {
+    if (!firstNotebook) return this.showStartMessage()
+    return notes && notes.length > 0 && notes.map(item => (
       <NoteItem key={item._id} title={item.note.title} description={item.note.description} completed={item.note.completed}
         color={item.note.color} isOld={true} id={item._id} onNoteDelete={this.onNoteDelete} onNoteUpdate={this.onNoteUpdate} />
     ))
@@ -48,14 +48,13 @@ export default class NotesBody extends Component {
   refreshNotes = (newNotes) => (this.setState(this.setState({ notes: [] }, () => this.setState({ notes: newNotes }))))
 
   render() {
-    const { notes } = this.state;
-    const { loading, firstNotebook } = this.props;
+    const { loading, firstNotebook, notes } = this.props;
 
     return (
       <FadeIn>
         {!loading && <div className="notes-body" >
           {firstNotebook && <NoteItem createNote={this.uploadNote} color="#fff" description='' title='' isOld={false} />}
-          {this.renderNotes(notes)}
+          {this.renderNotes(firstNotebook, notes)}
         </div>}
       </FadeIn>
     );
