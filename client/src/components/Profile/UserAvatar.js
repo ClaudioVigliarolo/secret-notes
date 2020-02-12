@@ -20,7 +20,6 @@ export default class UserAvatar extends React.Component {
       email: this.props.userData && this.props.userData.email,
       currentSecret: this.props.userData && this.props.userData.currentSecret,
       token: this.props.token,
-      avatar: this.props.profileImage,
       imageToUpload: null,
       error: false
     };
@@ -87,7 +86,7 @@ export default class UserAvatar extends React.Component {
         <CardHeader className="border-bottom text-center">
           <div className="mb-3 mx-auto">
 
-            {this.renderProfileImage(this.state.avatar)}
+            {this.renderProfileImage(this.props.profileImage)}
             <input
               onChange={this.getFile}
 
