@@ -113,18 +113,19 @@ class Main extends Component {
     this.setState({ showedNotes });
   }
 
-  updateUser = (newUserData) => { this.setState({ userData: null }, () => this.setState({ userData: newUserData })) }
+  updateUser = (newUserData) => { this.setState({ userData: newUserData }) }
 
-  changeAvatar = (newAvatar) => { this.setState({ profileImage: null }, () => this.setState({ profileImage: newAvatar })) }
+  changeAvatar = (newAvatar) => { this.setState({ profileImage: newAvatar }) }
 
   render() {
     const { match } = this.props;
     const { userData, token, notebooks, currentNotebook, loading, currentNotebookIndex, showedNotes, isEditable, profileImage, searchTerm } = this.state;
+    console.log("st", this.state)
     return (
       <div>
         <Container fluid >
           <Row>
-            <SideBar userData={userData} token={token} key={token && userData && notebooks[0] && notebooks[0]._id && currentNotebookIndex}
+            <SideBar userData={userData} token={token} key={userData && notebooks[0] && notebooks[0]._id && currentNotebookIndex}
               notebooks={notebooks} loadNotes={this.loadNotes} currentNotebookIndex={currentNotebookIndex} refreshNotebooks={this.loadNotebooks}
               toggleEditNotebook={this.toggleEditNotebook} isEditable={isEditable}
             />
