@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
-app.use(history(path.join(__dirname, '..', 'client', 'build', 'index.html')));
+//app.use(history(path.join(__dirname, '..', 'client', 'build', 'index.html')));
 app.use(userRouter);
 app.use(NotebookRouter);
 app.listen(PORT, () => {
