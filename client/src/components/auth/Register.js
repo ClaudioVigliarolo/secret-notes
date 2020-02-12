@@ -220,7 +220,7 @@ class Registration extends Component {
             </li>
           </ul>
         </div>
-        <Link to="/login" className="bottom-nav-text registation">
+        <Link to="/login" className="bottom-nav-text">
           {' '}
           <h6>
             {' '}
