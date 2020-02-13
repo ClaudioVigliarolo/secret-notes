@@ -12,7 +12,7 @@ const morgan = require('morgan');
 const path = require('path');
 const app = express();
 
-// Exprees will serve up production assets
+// Little trick to reduce bundle size
 app.use(compression());
 
 app.use(express.json());
