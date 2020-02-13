@@ -76,7 +76,7 @@ class UserActions extends React.Component {
           <DropdownItem onClick={() => this.navTo('profile')}>
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
-          <DropdownItem onClick={() => this.navTo('')} >
+          <DropdownItem onClick={() => this.navTo('secretNotes')} >
             <i className="material-icons">&#xE896;</i> My Notes
           </DropdownItem>
           <DropdownItem divider />
