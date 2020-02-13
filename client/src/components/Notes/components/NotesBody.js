@@ -32,8 +32,8 @@ export default class NotesBody extends Component {
     )
   }
 
-  renderNotes = (firstNotebook, notes) => {
-    if (!firstNotebook) return this.showStartMessage()
+  renderNotes = (firstNotebook, notes, loading) => {
+    if (!firstNotebook && !loading) return this.showStartMessage()
     return notes && notes.length > 0 && notes.map(item => (
       <NoteItem key={item._id} title={item.note.title} description={item.note.description} completed={item.note.completed}
         color={item.note.color} isOld={true} id={item._id} onNoteDelete={this.onNoteDelete} onNoteUpdate={this.onNoteUpdate} />
@@ -45,10 +45,10 @@ export default class NotesBody extends Component {
 
     return (
       <FadeIn>
-        {!loading && <div className="notes-body" >
+        <div className="notes-body" >
           {firstNotebook && <NoteItem createNote={this.uploadNote} color="#fff" description='' title='' isOld={false} />}
-          {this.renderNotes(firstNotebook, notes)}
-        </div>}
+          {this.renderNotes(firstNotebook, notes, loading)}
+        </div>
       </FadeIn>
     );
   }
