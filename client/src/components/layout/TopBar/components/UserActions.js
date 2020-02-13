@@ -58,8 +58,7 @@ class UserActions extends React.Component {
 
   };
 
-  navTo = (dest) => (this.props.history.push(`${this.props.match.path}/${dest}`))
-
+  navTo = (dest) => (this.props.history.push(`${this.props.match.path}${dest}`))
   render() {
     return (
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions} >
@@ -73,17 +72,17 @@ class UserActions extends React.Component {
           </DropdownToggle>
         </div>
         <Collapse tag={DropdownMenu} right small open={this.state.visible}>
-          <DropdownItem onClick={() => this.navTo('profile')}>
+          <DropdownItem onClick={() => this.navTo('/profile')}>
             <i className="material-icons">&#xE7FD;</i> Profile
           </DropdownItem>
-          <DropdownItem onClick={() => this.props.history.goBack()} >
+          <DropdownItem onClick={() => this.navTo('')} >
             <i className="material-icons">&#xE896;</i> My Notes
           </DropdownItem>
           <DropdownItem divider />
           <DropdownItem
             to="/login"
             className="text-danger"
-            onClick={() => { this.onUserLogout(); this.navTo('login') }}
+            onClick={() => { this.onUserLogout(); this.navTo('/login') }}
           >
             <i className="material-icons text-danger">&#xE879;</i> Logout
           </DropdownItem>
