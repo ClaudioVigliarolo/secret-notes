@@ -54,6 +54,7 @@ class Main extends Component {
 
   loadNotebooks = async (userData, userToken) => {
     const notebooksData = await getNotebooks(userData._id, userToken);
+    console.log("datttttttttttttt", notebooksData)
     const notebooks = notebooksData.data;
     this.setState({ notebooks: [...notebooks] }, () => notebooks.length > 0 && this.loadNotes(0))
 
@@ -66,14 +67,15 @@ class Main extends Component {
   }
 
   loadNotes = async (notebookIndex) => {
+
     const notebook = this.state.notebooks[notebookIndex];
     //for refreshing first note in child components
     this.setState({ currentNotebookIndex: -1 })
     const notesData = await getNotes(notebook._id, this.state.token);
-
+    console.log("notsdtaaaaaaaaa", notesData)
     this.setState({
-      currentNotes: this.sortNotes(notesData.data),
-      showedNotes: this.sortNotes(notesData.data), currentNotebook: notebook,
+      currentNotes: [...this.sortNotes(notesData.data)],
+      showedNotes: [...this.sortNotes(notesData.data)], currentNotebook: notebook,
       currentNotebookIndex: notebookIndex, isEditable: false, loading: false
     })
   }
@@ -85,6 +87,11 @@ class Main extends Component {
   toggleEditNotebook = () => {
     this.state.isEditable ? this.saveEditNotebook() : this.setState({ isEditable: !this.state.isEditable })
   }
+
+  refreshNotes = (newNotes) => {
+    this.setState({ currentNotes: newNotes, showedNotes: newNotes })
+  }
+
 
   saveEditNotebook = () => {
     this.setState({ isEditable: false });
@@ -120,7 +127,7 @@ class Main extends Component {
   render() {
     const { match } = this.props;
     const { userData, token, notebooks, currentNotebook, loading, currentNotebookIndex, showedNotes, isEditable, profileImage, searchTerm } = this.state;
-    console.log("st", this.state)
+    console.log("new stat", this.state)
     return (
       <div>
         <Container fluid >
@@ -143,9 +150,9 @@ class Main extends Component {
               <Switch>
                 <Route exact path={match.path} render={() => (
                   <Notes userData={userData && userData} loading={loading} firstNotebook={notebooks && notebooks.length > 0}
-                    token={token} notes={showedNotes} NotebookId={currentNotebook._id}
+                    token={token} notes={showedNotes} NotebookId={currentNotebook._id} refreshNotes={this.refreshNotes}
                     notebookHeader={currentNotebook.name} isEditable={isEditable} onChangeNoteBookName={this.onChangeNotebookName}
-                    key={currentNotebookIndex} />)} />
+                  />)} />
 
                 <Route exact path={`${match.path}/profile`} render={() => (<Profile component={Profile}
                   updateChanges={this.updateUser}
