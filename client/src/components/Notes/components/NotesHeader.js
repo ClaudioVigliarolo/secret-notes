@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+import React from 'react'
 
-export default class NotesHeader extends Component {
-  state = { isEditable: this.props.isEditable };
 
-  render() {
-    return (
-      <div
-        className="notes-header"
-      >
-        <input
-          disabled={!this.state.isEditable}
-          style={{ borderBottomColor: this.state.isEditable && 'black' }}
-          className="text-input"
-          value={this.props.notebookHeader}
-          onChange={this.props.onChangeNoteBookName}
-        />
-      </div>
-    );
-  }
+
+export default function NotesHeader(props) {
+  return (
+    <div
+      className="notes-header"
+    >
+      <input
+        disabled={!props.isEditable}
+        style={{ borderBottomColor: props.isEditable && 'black' }}
+        className="text-input"
+        value={props.notebookHeader}
+        onChange={props.onChangeNoteBookName}
+      />
+    </div>
+  )
 }

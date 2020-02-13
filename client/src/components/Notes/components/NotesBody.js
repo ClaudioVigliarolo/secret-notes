@@ -4,24 +4,22 @@ import '../notes.css'
 import NoteItem from './NoteItem'
 import { uploadNote, removeNote, updateNote } from '../../../api/api'
 export default class NotesBody extends Component {
-  state = { token: this.props.token, userData: this.props.userData, NotebookId: this.props.NotebookId }
-
+  state = { token: this.props.token, userData: this.props.userData, }
 
   uploadNote = async (note) => {
-    const res = await uploadNote(note, this.state.NotebookId, this.state.token);
-    this.refreshNotes(res.data.notes);
+    const res = await uploadNote(note, this.props.NotebookId, this.state.token);
+    this.props.refreshNotes(res.data.notes);
   }
 
   onNoteDelete = async (noteId) => {
-    removeNote(this.state.NotebookId, noteId, this.state.token).then((res) => this.refreshNotes(res.data.notes))
+    removeNote(this.props.NotebookId, noteId, this.state.token).then((res) => this.props.refreshNotes(res.data.notes))
 
   }
 
   onNoteUpdate = async (updatedNote, noteId) => {
-    const res = await updateNote(this.state.NotebookId, noteId, updatedNote, this.state.token);
-    this.refreshNotes(res.data.notes);
+    const res = await updateNote(this.props.NotebookId, noteId, updatedNote, this.state.token);
+    this.props.refreshNotes(res.data.notes);
   }
-  //this.props.onNoteUpdate(this.state.id, this.state.title, this.state.description);
 
   showStartMessage = () => {
     return (
@@ -30,7 +28,6 @@ export default class NotesBody extends Component {
           <h2 style={{ fontSize: 50 }}>Welcome</h2>
           <h3 style={{ fontSize: 30 }}>Create a new Notebook to Start using the App</h3>
         </div>
-        {/* / .error_content */}
       </div>
     )
   }
@@ -42,10 +39,6 @@ export default class NotesBody extends Component {
         color={item.note.color} isOld={true} id={item._id} onNoteDelete={this.onNoteDelete} onNoteUpdate={this.onNoteUpdate} />
     ))
   }
-
-
-
-  refreshNotes = (newNotes) => (this.setState(this.setState({ notes: [] }, () => this.setState({ notes: newNotes }))))
 
   render() {
     const { loading, firstNotebook, notes } = this.props;
