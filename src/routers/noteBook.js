@@ -44,14 +44,12 @@ router.post('/notebooks/:id', auth, cleanCache, async (req, res) => {
 });
 
 router.get('/notebook/:id', auth, async (req, res) => {
-    console.log("chiamta dal cielo")
     try {
         const notes = await Notebook.findOne(
             { _id: req.params.id },
             { notes: 1, _id: 0 }
-        ).cache({ userKey: req.user._id, notebookKey: req.params.id });
+        ).cache({ userKey: req.user._id });
 
-        console.log("Notes in .get", notes)
         if (!notes) {
             throw new Error();
         }
