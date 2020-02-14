@@ -1,38 +1,26 @@
 import React from "react";
-import classNames from "classnames";
 import { Container, Navbar } from "shards-react";
-
+import classNames from "classnames";
 import SearchBar from "./components/SearchBar";
 import UserActions from "./components/UserActions";
 
-
 const classes = classNames("main-navbar", "bg-white", "sticky-top");
 
-export default class TopBar extends React.PureComponent {
-  state = {
-    userData: this.props.userData,
-    searchLoading: false,
-    token: this.props.token,
-  };
+export default function TopBar(props) {
+  return (
+    <div className={classes} >
+      <Container className="p-0">
+        <Navbar
+          type="light"
+          className="align-items-stretch flex-md-nowrap p-0"
+        >
 
-  render() {
-    const { userData, token } = this.state;
-    const { profileImage } = this.props;
-    return (
-      <div className={classes} key={userData}>
-        <Container className="p-0">
-          <Navbar
-            type="light"
-            className="align-items-stretch flex-md-nowrap p-0"
-          >
-
-            <SearchBar handleSearchChange={this.props.handleSearchChange} searchTerm={this.props.searchValue} />
-            <UserActions token={token}
-              userData={userData} profileImage={profileImage}
-            />
-          </Navbar>
-        </Container>
-      </div>
-    );
-  }
+          <SearchBar handleSearchChange={props.handleSearchChange} searchTerm={props.searchValue} />
+          <UserActions token={props.token}
+            userData={props.userData} profileImage={props.profileImage}
+          />
+        </Navbar>
+      </Container>
+    </div>
+  )
 }

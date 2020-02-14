@@ -1,13 +1,15 @@
 
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { Container, Row, Col } from "shards-react";
 import { Route, Switch } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import Notes from '../Notes/NotesMain'
-import SideBar from '../layout/SideBar/Sidebar'
-import Profile from '../Profile/Profile'
-import TopBar from '../layout/TopBar/TopBar';
+
 import { getNotebooks, getNotes, getUserData, updateNotebook, getUserAvatar } from '../../api/api'
+
+const Notes = React.lazy(() => import('../Notes/NotesMain'));
+const Profile = React.lazy(() => import('../Profile/Profile'));
+const TopBar = React.lazy(() => import('../layout/TopBar/TopBar'));
+const SideBar = React.lazy(() => import('../layout/SideBar/Sidebar'));
 
 class Main extends Component {
   _isMounted = false;
@@ -129,7 +131,7 @@ class Main extends Component {
     const { userData, token, notebooks, currentNotebook, loading, currentNotebookIndex, showedNotes, isEditable, profileImage, searchTerm } = this.state;
     console.log("new stat", this.state)
     return (
-      <div>
+      <Suspense fallback={<div />}>
         <Container fluid >
           <Row>
             <SideBar userData={userData} token={token} key={userData && notebooks[0] && notebooks[0]._id && currentNotebookIndex}
@@ -162,7 +164,7 @@ class Main extends Component {
             </Col>
           </Row>
         </Container>
-      </div>
+      </Suspense>
     )
   }
 
