@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { HOSTNAME } from '../../../../config/config'
 import {
   Dropdown,
@@ -48,7 +47,7 @@ class UserActions extends React.Component {
     ) : (
 
         <Avatar
-          name={this.state.userData.firstName}
+          name={this.props.userData.firstName}
           round={true}
           size={40}
           className="rounded-circle mr-2"
@@ -60,6 +59,7 @@ class UserActions extends React.Component {
 
   navTo = (dest) => (this.props.history.push(`${this.props.match.path}${dest}`))
   render() {
+    console.log("user actii", this.state)
     return (
       <NavItem tag={Dropdown} caret toggle={this.toggleUserActions} >
         <div className="profile-top">
