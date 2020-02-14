@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Main from './components/main/Main';
@@ -7,7 +7,7 @@ import NotFound from './components/NotFound/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles-template/styles/styles.1.1.0.min.css';
 import './styles/app.css';
-export default function() {
+export default function () {
   return (
     <Switch>
       <Route exact path="/" render={() => <Redirect to="/login" />} />

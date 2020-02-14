@@ -3,11 +3,10 @@ import React, { Component, Suspense } from 'react';
 import { Container, Row, Col } from "shards-react";
 import { Route, Switch } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-
+import Profile from '../Profile/Profile'
 import { getNotebooks, getNotes, getUserData, updateNotebook, getUserAvatar } from '../../api/api'
 
 const Notes = React.lazy(() => import('../Notes/NotesMain'));
-const Profile = React.lazy(() => import('../Profile/Profile'));
 const TopBar = React.lazy(() => import('../layout/TopBar/TopBar'));
 const SideBar = React.lazy(() => import('../layout/SideBar/Sidebar'));
 
@@ -56,7 +55,6 @@ class Main extends Component {
 
   loadNotebooks = async (userData, userToken) => {
     const notebooksData = await getNotebooks(userData._id, userToken);
-    console.log("datttttttttttttt", notebooksData)
     const notebooks = notebooksData.data;
     this.setState({ notebooks: [...notebooks] }, () => notebooks.length > 0 && this.loadNotes(0))
 
@@ -74,7 +72,6 @@ class Main extends Component {
     //for refreshing first note in child components
     this.setState({ currentNotebookIndex: -1 })
     const notesData = await getNotes(notebook._id, this.state.token);
-    console.log("notsdtaaaaaaaaa", notesData)
     this.setState({
       currentNotes: [...this.sortNotes(notesData.data)],
       showedNotes: [...this.sortNotes(notesData.data)], currentNotebook: notebook,
