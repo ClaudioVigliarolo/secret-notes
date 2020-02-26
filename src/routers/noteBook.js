@@ -94,7 +94,7 @@ router.delete('/notebook/:notebookId', auth, async (req, res) => {
     }
 });
 
-router.patch('/notebook/:notebookId/:id', auth, async (req, res) => {
+router.patch('/notebook/:notebookId/:id', auth, cleanCache, async (req, res) => {
     try {
         const updatedNotebook = await Notebook.findById({
             _id: req.params.notebookId
